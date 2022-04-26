@@ -7,8 +7,8 @@
 #define FORMAT_OUTPUT_HEADER_SHORT -1
 
 const char *argp_program_version = "CSC v.1.0-15";
-const char *argp_program_bug_address = "<lutzy.yuly@yandex.ru>";
-static char doc[] = "Chromosome slice concatenation utility.\nDistributed open-source under GNU GPL v3 (see: https://www.gnu.org/licenses/)\nSource repository: \n© Copyright Svyatoslav Matveenko (NotYourFox), April 2022. All rights reserved.";
+const char *argp_program_bug_address = "<lutzy.yuly@yandex.ru> or https://github.com/NotYourFox/cisc/issues";
+static char doc[] = "";
 static char args_doc[] = "INFILE OUTFILE";
 static struct argp_option options[] = { 
     {"maxlength", MAX_LENGTH_SHORT, "MAXLENGTH", 0, "Max length of a chromosome slice (optional, default 100000)"},
@@ -45,6 +45,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state){
 static struct argp argp = {options, parse_opt, args_doc, doc};
 
 struct arguments arg_parse(int argc, char** argv){
+    printf("CISC v.1.0-15\nChromosome slice concatenation utility.\nDistributed open-source under GNU GPL v3 (see: https://www.gnu.org/licenses/)\nSource repository: https://github.com/NotYourFox/cisc\nCopyright: Svyatoslav Matveenko (NotYourFox), April 2022. All rights reserved.\n");
     struct arguments arguments;
     arguments.maxlength = 100000;
     arguments.format = false;
