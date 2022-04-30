@@ -253,13 +253,6 @@ char* get_sequence(struct entry entry, int hstart, int hend, const char* sequenc
     return res;
 }
 
-void clear_symbols(int n){
-    usleep(200000);
-    for (int i = 0; i < n; i++){
-        printf("\b \b");
-    }
-}
-
 int main(int argc, char** argv){
     struct arguments arguments = arg_parse(argc, argv);
     const char* infile = arguments.args[0];
@@ -323,9 +316,8 @@ int main(int argc, char** argv){
     int header_num = 1;
     int local_header_num = 1;
     char* res;
-    int toclear = 0;
     FILE* out;
-    printf("\nConcatenating slices...\n");
+    printf("\nConcatenating slices...");
     for (int i = 0; i < get_total_num_of_entry_ids(entries, num); i++){
         local_header_num = 1;
         struct entry* local_entries = get_entries_subarray_by_id(entries, ids[i], num);
@@ -336,9 +328,7 @@ int main(int argc, char** argv){
         sequence = malloc(sizeof(char));
         strcpy(sequence, "");
         for (int ii = 0; ii < get_total_entry_matches_by_id(entries, ids[i], num) - 1; ii++){
-            clear_symbols(toclear);
-            printf("Processing header %i of %i, entry %i of %i (id: %s, output sequence: %i (local: %i))...", ii, get_total_entry_matches_by_id(entries, ids[i], num), i + 1, get_total_num_of_entry_ids(entries, num), ids[i], header_num, local_header_num);
-            toclear = 18 + intlen(ii) + 4 + intlen(get_total_entry_matches_by_id(entries, ids[i], num)) + 8 + intlen(i) + 4 + intlen(num) + 6 + strlen(ids[i]) + 19 + intlen(header_num) + 9 + intlen(local_header_num) + 5;
+            printf("\nProcessing header %i of %i, entry %i of %i (id: %s, output sequence: %i (local: %i))...", ii, get_total_entry_matches_by_id(entries, ids[i], num), i + 1, get_total_num_of_entry_ids(entries, num), ids[i], header_num, local_header_num);
             sequence_len += strlen(local_entries[ii].sequence);
             sequence = realloc(sequence, (sequence_len + 1) * sizeof(char));
             sequence = strcat(sequence, local_entries[ii].sequence);
@@ -360,9 +350,7 @@ int main(int argc, char** argv){
                 local_header_num++;
             }
         }
-        clear_symbols(toclear);
-        printf("Processing header %i of %i, entry %i of %i (id: %s, output sequence: %i (local: %i))...", get_total_entry_matches_by_id(entries, ids[i], num), get_total_entry_matches_by_id(entries, ids[i], num), i+1, get_total_num_of_entry_ids(entries, num), ids[i], header_num, local_header_num);
-        toclear = 18 + intlen(get_total_entry_matches_by_id(entries, ids[i], num)) + 4 + intlen(get_total_entry_matches_by_id(entries, ids[i], num)) + 8 + intlen(i) + 4 + intlen(num) + 6 + strlen(ids[i]) + 19 + intlen(header_num) + 9 + intlen(local_header_num) + 5;
+        printf("\nProcessing header %i of %i, entry %i of %i (id: %s, output sequence: %i (local: %i))...", get_total_entry_matches_by_id(entries, ids[i], num), get_total_entry_matches_by_id(entries, ids[i], num), i+1, get_total_num_of_entry_ids(entries, num), ids[i], header_num, local_header_num);
         sequence_len += strlen(local_entries[get_total_entry_matches_by_id(entries, ids[i], num)-1].sequence);
         sequence = realloc(sequence, (sequence_len + 1) * sizeof(char));
         sequence = strcat(sequence, local_entries[get_total_entry_matches_by_id(entries, ids[i], num)  -1].sequence);

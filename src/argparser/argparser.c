@@ -45,7 +45,8 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state){
 static struct argp argp = {options, parse_opt, args_doc, doc};
 
 struct arguments arg_parse(int argc, char** argv){
-    printf("CISC v.1.0-15\nChromosome slice concatenation utility.\nDistributed open-source under GNU GPL v3 (see: https://www.gnu.org/licenses/)\nSource repository: https://github.com/NotYourFox/cisc\nCopyright: Svyatoslav Matveenko (NotYourFox), April 2022. All rights reserved.\n");
+    printf("CISC v.1.0-15\nChromosome slice concatenation utility.\nDistributed open-source under GNU GPL v3 (see: https://www.gnu.org/licenses/)\nSource repository: https://github.com/NotYourFox/cisc\nCopyright: Svyatoslav Matveenko (NotYourFox), April 2022. All rights reserved.\n\nPress ENTER key to continue...");
+    getchar();
     struct arguments arguments;
     arguments.maxlength = 100000;
     arguments.format = false;
