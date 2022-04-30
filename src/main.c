@@ -328,7 +328,7 @@ int main(int argc, char** argv){
         sequence = malloc(sizeof(char));
         strcpy(sequence, "");
         for (int ii = 0; ii < get_total_entry_matches_by_id(entries, ids[i], num) - 1; ii++){
-            printf("\nProcessing header %i of %i, entry %i of %i (id: %s, output sequence: %i (local: %i))...", ii, get_total_entry_matches_by_id(entries, ids[i], num), i + 1, get_total_num_of_entry_ids(entries, num), ids[i], header_num, local_header_num);
+            printf("\nProcessing header %i of %i, entry %i of %i (id: %s, output sequence: %i (local: %i))...", ii + 1, get_total_entry_matches_by_id(entries, ids[i], num), i + 1, get_total_num_of_entry_ids(entries, num), ids[i], header_num, local_header_num);
             sequence_len += strlen(local_entries[ii].sequence);
             sequence = realloc(sequence, (sequence_len + 1) * sizeof(char));
             sequence = strcat(sequence, local_entries[ii].sequence);
